@@ -1,0 +1,76 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isMember(chatId) {
+      return request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.members;
+    }
+
+    function isOwner(uid) {
+      return request.auth.uid == uid;
+    }
+
+    function isAdmin(chatId) {
+      return request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.admins;
+    }
+
+    // ── Users ─────────────────────────────────────────────────────────────────
+    match /users/{uid} {
+      allow read: if isAuth();
+      allow create: if isOwner(uid);
+      allow update: if isOwner(uid);
+      allow delete: if false;
+    }
+
+    // ── Chats ─────────────────────────────────────────────────────────────────
+    match /chats/{chatId} {
+      // Anyone in members can read the chat doc
+      allow read: if isAuth() && request.auth.uid in resource.data.members;
+
+      // Allow creating a chat if you include yourself as a member
+      allow create: if isAuth() && request.auth.uid in request.resource.data.members;
+
+      // Only members can update basic chat metadata
+      allow update: if isAuth() && request.auth.uid in resource.data.members;
+
+      // Only admins can delete a group chat
+      allow delete: if isAuth() && isAdmin(chatId);
+
+      // ── Messages ───────────────────────────────────────────────────────────
+      match /messages/{messageId} {
+        allow read: if isAuth() && isMember(chatId);
+
+        // Any member can create a message if they set themselves as senderId
+        allow create: if isAuth()
+          && isMember(chatId)
+          && request.resource.data.senderId == request.auth.uid;
+
+        // Only the sender can edit/delete their own messages
+        allow update: if isAuth()
+          && (
+            // Sender editing their own message
+            resource.data.senderId == request.auth.uid
+            // OR any member marking seen
+            || (isMember(chatId) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['seenBy']))
+            // OR any member adding a reaction
+            || (isMember(chatId) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reactions']))
+            // OR admin pinning
+            || (isAdmin(chatId) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isPinned']))
+          );
+
+        allow delete: if isAuth() && resource.data.senderId == request.auth.uid;
+      }
+    }
+
+    // ── Typing Status ─────────────────────────────────────────────────────────
+    match /typingStatus/{chatId} {
+      allow read: if isAuth();
+      allow write: if isAuth();
+    }
+  }
+}

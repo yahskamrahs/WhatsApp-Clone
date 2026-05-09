@@ -1,0 +1,184 @@
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 2px 0;
+  padding: 0 16px;
+  position: relative;
+}
+.sent { flex-direction: row-reverse; }
+.recv { flex-direction: row; }
+.avatar { flex-shrink: 0; margin-bottom: 20px; }
+
+.group {
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+  gap: 3px;
+}
+.sent .group { align-items: flex-end; }
+.recv .group { align-items: flex-start; }
+
+.senderName {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0 4px;
+}
+
+/* ─── Reply ─────────────────────────────────────────────────────────────────── */
+.replyPreview {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(108, 99, 255, 0.1);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border-left: 3px solid var(--accent);
+  max-width: 100%;
+}
+.sentReply { border-left: none; border-right: 3px solid var(--accent); }
+.replyLine { width: 2px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+.replyContent { display: flex; flex-direction: column; overflow: hidden; }
+.replyName { font-size: 11px; font-weight: 700; color: var(--accent); }
+.replyText { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ─── Bubble ─────────────────────────────────────────────────────────────────── */
+.bubble {
+  position: relative;
+  padding: 10px 14px;
+  border-radius: var(--radius-lg);
+  word-break: break-word;
+  cursor: default;
+}
+.sentBubble {
+  background: var(--sent-bg);
+  color: var(--sent-text);
+  border-bottom-right-radius: 4px;
+}
+.recvBubble {
+  background: var(--recv-bg);
+  color: var(--recv-text);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+}
+.pinned { border: 1px solid rgba(108, 99, 255, 0.5) !important; }
+.deleted { font-style: italic; color: var(--text-muted); font-size: 13px; }
+
+/* ─── Content ────────────────────────────────────────────────────────────────── */
+.text { font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+.imgAttachment {
+  max-width: 240px;
+  max-height: 220px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: block;
+  margin-bottom: 4px;
+  object-fit: cover;
+  transition: opacity var(--transition);
+}
+.imgAttachment:hover { opacity: 0.85; }
+.fileLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 4px 0;
+}
+.fileLink:hover { text-decoration: underline; }
+
+/* ─── Edit area ──────────────────────────────────────────────────────────────── */
+.editArea { display: flex; flex-direction: column; gap: 6px; }
+.editInput {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  resize: none;
+  padding: 8px;
+  outline: none;
+  min-width: 180px;
+}
+.editActions { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* ─── Actions ────────────────────────────────────────────────────────────────── */
+.actions {
+  position: absolute;
+  top: -36px;
+  display: flex;
+  gap: 2px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 3px 6px;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.15s ease;
+}
+.actionsLeft  { right: 0; }
+.actionsRight { left: 0; }
+.actionBtn {
+  background: none;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition);
+  line-height: 1;
+}
+.actionBtn:hover { transform: scale(1.25); background: var(--bg-hover); }
+.danger:hover { background: rgba(239, 68, 68, 0.15); }
+
+/* ─── Reaction Picker ────────────────────────────────────────────────────────── */
+.reactionPicker {
+  position: absolute;
+  top: -52px;
+  right: -4px;
+  z-index: 20;
+}
+.reactionLeft { right: auto; left: -4px; }
+
+
+/* ─── Reaction chips ─────────────────────────────────────────────────────────── */
+.reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 4px;
+}
+.reactionsRight { justify-content: flex-end; }
+.reactionChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.reactionChip span { font-size: 11px; color: var(--text-secondary); font-weight: 600; }
+.reactionChip:hover { border-color: var(--accent); background: var(--bg-hover); }
+.myReaction { background: var(--accent-glow); border-color: var(--accent); }
+
+/* ─── Meta ───────────────────────────────────────────────────────────────────── */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.metaRight { justify-content: flex-end; }
+.edited { font-style: italic; }
+.time {}
+.seen { color: var(--accent); font-weight: 700; }
+.pinnedTag { font-size: 11px; }
