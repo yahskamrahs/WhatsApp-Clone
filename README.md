@@ -1,4 +1,4 @@
-﻿# 💬 Chatter — Real-Time Chat Application
+﻿# 💬 WhatsApp Clone — Real-Time Chat Application
 
 A modern real-time messaging app built with **React 18 + Vite** and **Firebase v10**. It supports authentication, direct and group chat, file/image uploads, typing indicators, and real-time presence.
 

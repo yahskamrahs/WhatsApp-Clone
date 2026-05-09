@@ -49,7 +49,7 @@ const ProfilePage = () => {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <button className="btn btn-ghost" onClick={() => navigate('/chat')}>← Back</button>
+          <button className="btn btn-ghost" onClick={() => navigate('/dashboard')}>← Back</button>
           <h1 className={styles.title}>Profile Settings</h1>
         </div>
 

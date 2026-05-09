@@ -18,7 +18,7 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
 
             <Route
-              path="/chat"
+              path="/dashboard"
               element={
                 <ProtectedRoute>
                   <ChatPage />
@@ -35,7 +35,7 @@ const App = () => {
             />
 
             {/* Catch-all */}
-            <Route path="*" element={<Navigate to="/chat" replace />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
 
           <Toaster

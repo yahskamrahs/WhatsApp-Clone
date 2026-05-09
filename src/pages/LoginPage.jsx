@@ -15,7 +15,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       await signInWithEmail(email, password);
-      navigate('/chat');
+      navigate('/dashboard');
     } catch (e) {
       setError(getAuthError(e.code));
     } finally {
@@ -28,7 +28,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       await signInWithGoogle();
-      navigate('/chat');
+      navigate('/dashboard');
     } catch (e) {
       setError(getAuthError(e.code));
     } finally {
@@ -41,7 +41,7 @@ const LoginPage = () => {
       <div className={styles.card}>
         <div className={styles.brand}>
           <span className={styles.logo}>💬</span>
-          <h1 className={styles.appName}>Chatter</h1>
+          <h1 className={styles.appName}>WhatsApp Clone</h1>
           <p className={styles.tagline}>Real-time messaging, reimagined.</p>
         </div>
 
