@@ -32,8 +32,8 @@ A modern real-time messaging app built with **React 18 + Vite** and **Firebase v
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd "Real Time Chat"
+git clone https://github.com/yahskamrahs/WhatsApp-Clone.git
+cd "WhatsApp-Clone"
 npm install
 ```
 
@@ -69,7 +69,7 @@ npm run dev
 
 Open the app at `http://localhost:5173`
 
-## 🧱 Project Structure
+## Project Structure
 
 - `src/firebase/` — Firebase initialization and helpers
 - `src/context/` — Auth and chat state providers
@@ -78,14 +78,14 @@ Open the app at `http://localhost:5173`
 - `src/pages/` — Auth, chat, profile, login, register screens
 - `src/utils/` — Utility helpers
 
-## 🔧 Available Scripts
+## Available Scripts
 
 - `npm run dev` — Start the development server
 - `npm run build` — Create a production build
 - `npm run preview` — Preview the production build locally
 - `npm run lint` — Run ESLint
 
-## 📦 Dependencies
+## Dependencies
 
 - `react`, `react-dom`, `vite`
 - `firebase`
@@ -96,13 +96,13 @@ Open the app at `http://localhost:5173`
 - `zustand`
 - `date-fns`
 
-## 🔐 Firebase Notes
+## Firebase Notes
 
 - Firestore stores users, chats, and messages
 - Realtime Database is used for online presence and typing state
 - Storage handles image/file uploads
 
-## ✅ Notes
+## Notes
 
 - Use Firebase security rules to protect user data
 - Only authenticated users should read/write chat records
